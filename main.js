@@ -39,6 +39,36 @@ function addBook() {
         return;
     }
 
+    const newBook = {
+        id: +new Date(),
+        title: title,
+        author: author,
+        year: year,
+        isComplete: isComplete,
+    };
+
+    books.push(newBook);
+    saveBooksToLocalStorage();
+
+    if (isComplete) {
+        addToCompleteBookshelf(newBook);
+    } else {
+        addToIncompleteBookshelf(newBook);
+    }
+
+    clearInputForm();
+
 }
+
+function addToIncompleteBookshelf(book) {
+    const bookItem = createBookItem(book);
+    incompleteBookshelfList.appendChild(bookItem);
+}
+
+function addToCompleteBookshelf(book) {
+    const bookItem = createBookItem(book);
+    completeBookshelfList.appendChild(bookItem);
+}
+
 
 
